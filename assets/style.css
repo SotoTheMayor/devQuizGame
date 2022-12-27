@@ -98,5 +98,36 @@ footer {
 
 .submit {
     border-style: solid;
+
     
+}
+
+.hBody {
+    border-style: solid;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.hTitle {
+    border-style: solid;
+}
+
+.topScores {
+    border-style: solid;
+}
+
+.return {
+    border-style: solid;
+}
+
+a {
+    text-decoration: none;
+    color:dodgerblue;
+}
+
+a:visited {
+    text-decoration: none;
+    color:dodgerblue;
 }
