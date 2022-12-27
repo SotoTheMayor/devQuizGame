@@ -1,5 +1,5 @@
 * {
-    margin: 10px;
+    margin: 5px;
 }
 
 header {
@@ -14,30 +14,89 @@ header {
     text-align: center;
     flex-basis: 60%;
     align-self: center;
+    border-style: solid;
+    font-size: 15px;
 }
 
 .highscores {
     flex-basis: 20%;
     border-style: solid;
     align-self: center;
+    font-size: 10px;
+    text-align: center;
 }
 
 .timer {
+    /* display: flex; */
+    flex-direction: column;
     border-style: solid;
     flex-basis: 20%;
+    text-align: center;
     align-self: center;
+}
+
+.sec {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.timer h1 {
+    font-size: 17px;
 }
 
 main {
     border-style: solid;
     padding: 20px;
-    max-height: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 
+}
+
+.questions {
+    border-style: solid;
+    flex-basis: 50%;
+}
+
+.qHead {
+    border-style: solid;
+}
+
+/* .qNum {
+    border-style: solid;
+} */
+
+.qText {
+    border-style: solid;
+}
+
+.answers {
+    border-style: solid;
+    flex-basis: 50%;
+}
+
+.aHead {
+    border-style: solid;
+}
+
+.aText {
+    border-style: solid;
 }
 
 footer {
     border-style: solid;
     padding: 20px;
-    max-height: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 
+}
+
+.start {
+    border-style: solid;
+}
+
+.submit {
+    border-style: solid;
+    
 }
