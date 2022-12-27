@@ -1,0 +1,43 @@
+* {
+    margin: 10px;
+}
+
+header {
+    border-style: solid;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.title {
+    text-align: center;
+    flex-basis: 60%;
+    align-self: center;
+}
+
+.highscores {
+    flex-basis: 20%;
+    border-style: solid;
+    align-self: center;
+}
+
+.timer {
+    border-style: solid;
+    flex-basis: 20%;
+    align-self: center;
+}
+
+main {
+    border-style: solid;
+    padding: 20px;
+    max-height: 500px;
+
+}
+
+footer {
+    border-style: solid;
+    padding: 20px;
+    max-height: 500px;
+
+}
