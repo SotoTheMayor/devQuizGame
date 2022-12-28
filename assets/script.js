@@ -2,62 +2,87 @@ var qText = document.querySelector(".qText") ;
 var aText = document.querySelector(".aText") ;
 var start = document.querySelector(".start") ;
 var submit = document.querySelector(".submit") ;
+var qNum = document.querySelector(".qNum")
+var ul = document.querySelector("#ul");
+var li1 = document.querySelector("#li1");
+var li2 = document.querySelector("#li2");
+var li3 = document.querySelector("#li3");
+var li4 = document.querySelector("#li4");
+var li5 = document.querySelector("#li5");
+var a1 = "";
+var a2 = "";
+var a3 = "";
+var a4 = "";
+var a5 = "";
+var q = 0;
+
 
 start.setAttribute("style", "visibility:visible") ;
 submit.setAttribute("style", "visibility:hidden") ;
+ul.setAttribute("style", "visibility:hidden") ;
+li1.setAttribute("style", "visibility:hidden") ;
+li2.setAttribute("style", "visibility:hidden") ;
+li3.setAttribute("style", "visibility:hidden") ;
+li4.setAttribute("style", "visibility:hidden") ;
+li5.setAttribute("style", "visibility:hidden") ;
 
 qText.textContent = "This is where the question text will go" ;
-aText.textContent = "This is where the answer text will go" ;
+
 
 function startQuiz(event) {
     event.currentTarget.setAttribute ("style", "visibility:hidden") ;
     submit.setAttribute ("style", "visibility:visible") ;
-    for (i=0; i<5; i++) {
-        x = questions[i];
-        submitAnswer(x);
-    }
+    ul.setAttribute("style", "visibility:visible") ;
+    li1.setAttribute("style", "visibility:visible") ;
+    li2.setAttribute("style", "visibility:visible") ;
+    li3.setAttribute("style", "visibility:visible") ;
+    li4.setAttribute("style", "visibility:visible") ;
+    li5.setAttribute("style", "visibility:visible") ;
+    quizQuestions();
 } ;
 
-function submitAnswer(x) {
-    var ul = document.createElement("ul");
-    ul.textContent = x.ul;
-    aText.appendChild(ul);
-    var li1 = document.createElement("li");
-    var li2 = document.createElement("li");
-    var li3 = document.createElement("li");
-    var li4 = document.createElement("li");
-    var li5 = document.createElement("li");
-    li1.textContent = x.li1;
-    li2.textContent = x.li2;
-    li3.textContent = x.li3;
-    li4.textContent = x.li4;
-    li5.textContent = x.li5;
-    ul.appendChild(li1);
-    ul.appendChild(li2);
-    ul.appendChild(li3);
-    ul.appendChild(li4);
-    ul.appendChild(li5);
-
+function quizQuestions() {
+    qNum.textContent = questions[q].qNum;
+    ul.textContent = questions[q].ul;
+    li1.textContent = questions[q].li1;
+    li2.textContent = questions[q].li2;
+    li3.textContent = questions[q].li3;
+    li4.textContent = questions[q].li4;
+    li5.textContent = questions[q].li5;
+    q++;
+    console.log(q);
+    return q;
+    
 }
 
-function finalAnswer(event) {
-    event.currentTarget.setAttribute ("style", "visibility:hidden") ; 
-    start.setAttribute ("style", "visibility:visible") ;
-    var ul = document.querySelector("ul");
-    ul.remove();
-    var li1 = document.querySelector("li1");
-    var li2 = document.querySelector("li2");
-    var li3 = document.querySelector("li3");
-    var li4 = document.querySelector("li4");
-    var li5 = document.querySelector("li5");
-    li1.remove();
-    li2.remove();
-    li3.remove();
-    li4.remove();
-    li5.remove();
+function nextQuestion() {
+    if (q==4) {
+        submit.textContent = "Finish Quiz";
+        submit.addEventListener("click", finalAnswer) ;
+    };
+    quizQuestions();
+};
+
+
+function finalAnswer() {
+
+    quizFinish();
 } ;
 
+function quizFinish() {
+    submit.setAttribute ("style", "visibility:hidden") ; 
+    start.setAttribute ("style", "visibility:visible") ;
+    ul.setAttribute("style", "visibility:hidden") ;
+    li1.setAttribute("style", "visibility:hidden") ;
+    li2.setAttribute("style", "visibility:hidden") ;
+    li3.setAttribute("style", "visibility:hidden") ;
+    li4.setAttribute("style", "visibility:hidden") ;
+    li5.setAttribute("style", "visibility:hidden") ;
+    
+};
+
 var q1 = {
+    qNum: 1,
     ul: "Question 1",
     li1: "A",
     li2: "B",
@@ -67,6 +92,7 @@ var q1 = {
 };
 
 var q2 = {
+    qNum: 2,
     ul: "Question 2",
     li1: "F",
     li2: "G",
@@ -76,6 +102,7 @@ var q2 = {
 };
 
 var q3 = {
+    qNum: 3,
     ul: "Question 3",
     li1: "K",
     li2: "L",
@@ -85,6 +112,7 @@ var q3 = {
 };
 
 var q4 = {
+    qNum: 4,
     ul: "Question 4",
     li1: "P",
     li2: "Q",
@@ -94,6 +122,7 @@ var q4 = {
 };
 
 var q5 = {
+    qNum: 5,
     ul: "Question 5",
     li1: "U",
     li2: "V",
@@ -105,4 +134,4 @@ var q5 = {
 var questions = [q1, q2, q3, q4, q5];
 
 start.addEventListener("click", startQuiz) ;
-submit.addEventListener("click", finalAnswer) ;
+submit.addEventListener("click", nextQuestion) ;
