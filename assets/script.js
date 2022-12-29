@@ -49,24 +49,27 @@ function quizQuestions() {
     li3.textContent = questions[q].li3;
     li4.textContent = questions[q].li4;
     li5.textContent = questions[q].li5;
-    q++;
-    console.log(q);
     return q;
     
 }
 
 function nextQuestion() {
-    if (q==4) {
+    q = q+1;
+    if (q>=4) {
+        quizQuestions();
+        q = 0;
         submit.textContent = "Finish Quiz";
+        submit.removeEventListener("click", nextQuestion);
         submit.addEventListener("click", finalAnswer) ;
-    };
+    } else {
     quizQuestions();
+    }
 };
 
 
 function finalAnswer() {
-
     quizFinish();
+
 } ;
 
 function quizFinish() {
@@ -78,7 +81,10 @@ function quizFinish() {
     li3.setAttribute("style", "visibility:hidden") ;
     li4.setAttribute("style", "visibility:hidden") ;
     li5.setAttribute("style", "visibility:hidden") ;
-    
+    console.log(q + " quiz finish");
+    submit.textContent = "Submit";
+    submit.removeEventListener("click", finalAnswer);
+    submit.addEventListener("click", nextQuestion) ;
 };
 
 var q1 = {
