@@ -9,16 +9,17 @@ var li2 = document.querySelector("#li2");
 var li3 = document.querySelector("#li3");
 var li4 = document.querySelector("#li4");
 var li5 = document.querySelector("#li5");
+var score = 0;
 var a1 = "";
 var a2 = "";
 var a3 = "";
 var a4 = "";
 var a5 = "";
-var q = 0;
 
 
 start.setAttribute("style", "visibility:visible") ;
 submit.setAttribute("style", "visibility:hidden") ;
+qNum.setAttribute("style", "visibility:hidden") ;
 ul.setAttribute("style", "visibility:hidden") ;
 li1.setAttribute("style", "visibility:hidden") ;
 li2.setAttribute("style", "visibility:hidden") ;
@@ -32,12 +33,15 @@ qText.textContent = "This is where the question text will go" ;
 function startQuiz(event) {
     event.currentTarget.setAttribute ("style", "visibility:hidden") ;
     submit.setAttribute ("style", "visibility:visible") ;
+    qNum.setAttribute("style", "visibility:visible") ;
     ul.setAttribute("style", "visibility:visible") ;
     li1.setAttribute("style", "visibility:visible") ;
     li2.setAttribute("style", "visibility:visible") ;
     li3.setAttribute("style", "visibility:visible") ;
     li4.setAttribute("style", "visibility:visible") ;
     li5.setAttribute("style", "visibility:visible") ;
+    q = 0;
+    finalScore = 0;
     quizQuestions();
 } ;
 
@@ -49,18 +53,48 @@ function quizQuestions() {
     li3.textContent = questions[q].li3;
     li4.textContent = questions[q].li4;
     li5.textContent = questions[q].li5;
-    return q;
+   // return q;
     
 }
 
 function nextQuestion() {
+    if (q===0) {
+        console.log(q);
+        if (li1 == document.activeElement) {
+            score = score + 100;
+        }
+    } else if (q===1) {
+        console.log(q);
+        if (li1 == document.activeElement) {
+            score = score + 100;
+        }
+    } else if (q===2) {
+        console.log(q);
+        if (li1 == document.activeElement) {
+            score = score + 100;
+        }
+    } else if (q===3) {
+        console.log(q);
+        if (li1 == document.activeElement) {
+            score = score + 100;
+        }
+    } else if (q===4) {
+        console.log(q);
+        if (li1 == document.activeElement) {
+            score = score + 100;
+        }
+    } else {
+        score = score + 0;
+    };
+    console.log(score);
     q = q+1;
+
     if (q>=4) {
         quizQuestions();
         q = 0;
         submit.textContent = "Finish Quiz";
-        submit.removeEventListener("click", nextQuestion);
-        submit.addEventListener("click", finalAnswer) ;
+        submit.removeEventListener("mousedown", nextQuestion);
+        submit.addEventListener("mousedown", finalAnswer) ;
     } else {
     quizQuestions();
     }
@@ -75,6 +109,7 @@ function finalAnswer() {
 function quizFinish() {
     submit.setAttribute ("style", "visibility:hidden") ; 
     start.setAttribute ("style", "visibility:visible") ;
+    qNum.setAttribute("style", "visibility:hidden") ;
     ul.setAttribute("style", "visibility:hidden") ;
     li1.setAttribute("style", "visibility:hidden") ;
     li2.setAttribute("style", "visibility:hidden") ;
@@ -83,8 +118,11 @@ function quizFinish() {
     li5.setAttribute("style", "visibility:hidden") ;
     console.log(q + " quiz finish");
     submit.textContent = "Submit";
-    submit.removeEventListener("click", finalAnswer);
-    submit.addEventListener("click", nextQuestion) ;
+    submit.removeEventListener("mousedown", finalAnswer);
+    finalScore = score;
+    score = 0;
+    console.log(finalScore + " final score");
+    console.log(score + " should be 0 to reset score")
 };
 
 var q1 = {
@@ -140,4 +178,9 @@ var q5 = {
 var questions = [q1, q2, q3, q4, q5];
 
 start.addEventListener("click", startQuiz) ;
-submit.addEventListener("click", nextQuestion) ;
+//submit.addEventListener("mousedown", nextQuestion) ;
+
+submit.addEventListener("mousedown", function(event){
+    event.stopPropagation;
+    nextQuestion();
+}) ;
