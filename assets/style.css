@@ -83,6 +83,10 @@ main {
     border-style: solid;
 }
 
+li {
+    list-style: none;
+}
+
 footer {
     border-style: solid;
     padding: 20px;
