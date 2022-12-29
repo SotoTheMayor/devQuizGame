@@ -9,12 +9,9 @@ var li2 = document.querySelector("#li2");
 var li3 = document.querySelector("#li3");
 var li4 = document.querySelector("#li4");
 var li5 = document.querySelector("#li5");
+var sec = document.querySelector("#sec");
 var score = 0;
-var a1 = "";
-var a2 = "";
-var a3 = "";
-var a4 = "";
-var a5 = "";
+var secLeft = 90;
 
 
 start.setAttribute("style", "visibility:visible") ;
@@ -29,6 +26,22 @@ li5.setAttribute("style", "visibility:hidden") ;
 
 qText.textContent = "This is where the question text will go" ;
 
+var timerInterval = setInterval(setTime, 1000);
+
+function setTime() {
+    secLeft--;
+    sec.textContent = secLeft;
+     if (secLeft===0) {
+        clearInterval(timerInterval);
+        alert("time's up!");
+};
+};
+
+function stopTime() {
+    clearInterval(timerInterval);
+};
+
+
 
 function startQuiz(event) {
     event.currentTarget.setAttribute ("style", "visibility:hidden") ;
@@ -42,6 +55,8 @@ function startQuiz(event) {
     li5.setAttribute("style", "visibility:visible") ;
     q = 0;
     finalScore = 0;
+    secLeft = 20;
+    setTime();
     quizQuestions();
 } ;
 
@@ -123,6 +138,7 @@ function quizFinish() {
     score = 0;
     console.log(finalScore + " final score");
     console.log(score + " should be 0 to reset score")
+    stopTime();
 };
 
 var q1 = {
