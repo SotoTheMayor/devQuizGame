@@ -87,6 +87,14 @@ li {
     list-style: none;
 }
 
+.btn {
+    border-radius: 8px;
+}
+
+.btn:focus {
+    background-color:blueviolet;
+}
+
 footer {
     border-style: solid;
     padding: 20px;
