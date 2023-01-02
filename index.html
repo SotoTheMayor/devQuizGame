@@ -13,18 +13,22 @@
         <div class="title"><h1>Dev Quiz Game</h1></div>
         <div class="timer"><span id="sec">0</span><h1>seconds remaining</h2></div>
     </header>
+    <!-- instruction button popup -->
     <aside><button id="instructions">Instructions</button></aside>
     <main>
+        <!-- container for all questions -->
         <div class="questions">
             <div class="qHead">
                 <h2>Question # <span class="qNum">0</span>of 5</h2>
             </div>
             <div class="qText"></div>
         </div>
+        <!-- container for all answers -->
         <div class="answers">
             <div class="aHead"><h2>Choose the best answer:</h2></div>
             <div class="aText">
                 <ul id="ul"></ul>
+                <!-- sets each list item as a separate answer for scoring -->
                 <li><button id="li1" class="btn"></button></li>
                 <li><button id="li2" class="btn"></button></li>
                 <li><button id="li3" class="btn"></button></li>
@@ -34,6 +38,7 @@
         </div>
     </main>
     <footer>
+        <!-- buttons for beginning quiz and submitting answers -->
         <button class="start">Start</button>
         <button class="submit">Submit</button>
     </footer>

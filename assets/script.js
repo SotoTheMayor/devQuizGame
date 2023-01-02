@@ -16,7 +16,7 @@ var score = 0;
 var timerInterval;
 
 
-
+//hiding questions, answers and submit button until quiz start
 start.setAttribute("style", "visibility:visible") ;
 submit.setAttribute("style", "visibility:hidden") ;
 qNum.setAttribute("style", "visibility:hidden") ;
@@ -28,14 +28,17 @@ li3.setAttribute("style", "visibility:hidden") ;
 li4.setAttribute("style", "visibility:hidden") ;
 li5.setAttribute("style", "visibility:hidden") ;
 
+//function to display instructions on button click
 function insPop() {
     alert("When ready, click Start to begin\nA timer will begin counting from 40 seconds\nSelect an answer by clicking on it, then clicking the Submit button\nEach correct answer will get you 100 points\nEach wrong answer will take 10 seconds off the timer\nAny time remaining will get you bonus points\nScore in the top 5 to add your initials to the highscores!\n \n HAVE FUN!!!");
 };
 
+//function to begin the timer
 function beginTimer() {
     timerInterval = setInterval(setTime, 1000)
 };
 
+//function to define the timer's parameters
 function setTime() {
     secLeft--;
     sec.textContent = secLeft;
@@ -47,12 +50,15 @@ function setTime() {
 };
 };
 
+//made global to be able to halt the timer for multiple reasons
 function stopTime() {
     clearInterval(timerInterval);
     sec.textContent = 0;
     timerInterval = null;
 };
 
+//make answers, questions, and submit button visible,
+//reset scores, question count, start timer, and hide quiz start button
 function startQuiz() {
     start.setAttribute ("style", "visibility:hidden") ;
     submit.setAttribute ("style", "visibility:visible") ;
@@ -69,13 +75,13 @@ function startQuiz() {
     secLeft = 40;
     beginTimer();
     quizQuestions();
-    console.log(highSaves);
 } ;
 
+//function to cycle through the quiz question objects
 function quizQuestions() {
     qNum.textContent = questions[q].qNum;
     qText.textContent = questions[q].qText;
-    ul.textContent = questions[q].ul;
+    ul.textContent = "";
     li1.textContent = questions[q].li1;
     li2.textContent = questions[q].li2;
     li3.textContent = questions[q].li3;
@@ -83,57 +89,55 @@ function quizQuestions() {
     li5.textContent = questions[q].li5;
 }
 
+//tests question number and answer, adjusts score and display
 function nextQuestion() {
     if (q===0) {
-        console.log(q);
-        if (li1 == document.activeElement) {
+        if (li2 == document.activeElement) {
             score = score + 100;
         } else {
             secLeft = secLeft - 5; 
         }
     } else if (q===1) {
-        console.log(q);
         if (li1 == document.activeElement) {
             score = score + 100;
         } else {
             secLeft = secLeft - 5; 
         }
     } else if (q===2) {
-        console.log(q);
-        if (li1 == document.activeElement) {
+        if (li5 == document.activeElement) {
             score = score + 100;
         } else {
             secLeft = secLeft - 5; 
         }
     } else if (q===3) {
-        console.log(q);
-        if (li1 == document.activeElement) {
+        //changes text of submit button to finish quiz
+        submit.textContent = "Finish Quiz";
+        if (li3 == document.activeElement) {
             score = score + 100;
         } else {
             secLeft = secLeft - 5; 
         }
     } else if (q===4) {
-        console.log(q);
-        if (li1 == document.activeElement) {
+        //changes function of submit button to end the quiz
+        submit.removeEventListener("mousedown", nextQuestion);
+        submit.addEventListener("mousedown", quizFinish) ;
+        if (li5 == document.activeElement) {
             score = score + 100;
         } else {
             secLeft = secLeft - 5; 
         }
     };
-    console.log(score);
+    //move to next question
     q = q+1;
-
-    if (q>=4) {
-        quizQuestions();
-        q = 0;
-        submit.textContent = "Finish Quiz";
-        submit.removeEventListener("mousedown", nextQuestion);
-        submit.addEventListener("mousedown", quizFinish) ;
+    //test if through all 5 questions, if not, cycle 
+    if (q>=5) {
+        quizFinish();
     } else {
     quizQuestions();
     }
 };
 
+//sets final score, resets to quiz start
 function quizFinish() {
     submit.setAttribute ("style", "visibility:hidden") ; 
     start.setAttribute ("style", "visibility:visible") ;
@@ -145,18 +149,18 @@ function quizFinish() {
     li3.setAttribute("style", "visibility:hidden") ;
     li4.setAttribute("style", "visibility:hidden") ;
     li5.setAttribute("style", "visibility:hidden") ;
-    console.log(q + " quiz finish");
     submit.textContent = "Submit";
     submit.removeEventListener("mousedown", quizFinish);
     finalScore = score + (secLeft*10);
     score = 0;
-    console.log(finalScore + " final score");
     stopTime();
     finalScoreCalc();
-    console.log(highSaves);
+    q = 0;
 };
 
+//local storage high score function
 function finalScoreCalc() {
+//creates local storage key if not present
     var highSaves = JSON.parse(localStorage.getItem("highSaves"));
     if (highSaves.high1 == null) {
         var highSaves = {
@@ -172,6 +176,7 @@ function finalScoreCalc() {
             score5: 0,
             }
     };
+    //tests for score rank based on local storage, adjusts ranks
     if (finalScore > highSaves.score1) {
         highSaves.high5 = highSaves.high4;
         highSaves.score5 = highSaves.score4;
@@ -183,6 +188,7 @@ function finalScoreCalc() {
         highSaves.score2 = highSaves.score1;
         highSaves.score1 = finalScore;
         highSaves.high1 = prompt("You're the top score with " + finalScore + "!  Enter your initials:", "3 character initials here")
+        //requires 3 character length high score name
         if (highSaves.high1.length !== 3) {
             alert("Initials are only 3 character length.  Please input again.")
             finalScoreCalc();
@@ -238,67 +244,66 @@ function finalScoreCalc() {
             localStorage.setItem("highSaves", JSON.stringify(highSaves));
             }
     } else {
+        //pop up for not top 5
         alert("Sorry. Your score is not in the top 5.  Try again!")
     };
 }
 
+//objects for question and answer variables
 var q1 = {
     qNum: 1,
-    qText: "Question:1",
-    ul: "Answer 1:",
-    li1: "A",
-    li2: "B",
-    li3: "C",
-    li4: "D",
-    li5: "E",
+    qText: "API stands for Application _________ Interface?",
+    li1: "Platform",
+    li2: "Programming",
+    li3: "Partner",
+    li4: "Performance",
+    li5: "Presence",
 };
 
 var q2 = {
     qNum: 2,
-    qText: "Question:2",
-    ul: "Answer 2:",
-    li1: "F",
-    li2: "G",
-    li3: "H",
-    li4: "I",
-    li5: "J",
+    qText: "In HTML, what is everything from the start tag to the end tag is called?",
+    li1: "Element",
+    li2: "Refernce",
+    li3: "Selector",
+    li4: "Line",
+    li5: "Aspect",
 };
 
 var q3 = {
     qNum: 3,
-    qText: "Question:3",
-    ul: "Answer 3:",
-    li1: "K",
-    li2: "L",
-    li3: "M",
-    li4: "N",
-    li5: "O",
+    qText: "If you want to access the 'box' element in the array Arr = ['box', 'car', 'racer'], what would you set for X in Arr[X]?",
+    li1: "-1",
+    li2: "1",
+    li3: "start",
+    li4: "first",
+    li5: "0",
 };
 
 var q4 = {
     qNum: 4,
-    qText: "Question:4",
-    ul: "Answer 4:",
-    li1: "P",
-    li2: "Q",
-    li3: "R",
-    li4: "S",
-    li5: "T",
+    qText: "X += Y is the same as which of the following?",
+    li1: "X++",
+    li2: "Y = X + Y",
+    li3: "X = X + Y",
+    li4: "Y++",
+    li5: "X = Y + Y",
 };
 
 var q5 = {
     qNum: 5,
-    qText: "Question:5",
-    ul: "Answer 5:",
-    li1: "U",
-    li2: "V",
-    li3: "W",
-    li4: "X",
-    li5: "Y",
+    qText: "In this CSS declaration example (color:blue), color is the property and blue is the _________?",
+    li1: "Syntax",
+    li2: "Focus",
+    li3: "Attribute",
+    li4: "Selector",
+    li5: "Value",
 };
 
+//array used to cycle questions in nextQuestion function
 var questions = [q1, q2, q3, q4, q5];
 
+//initial event listeners
 start.addEventListener("click", startQuiz) ;
 instructions.addEventListener("click", insPop) ;
 submit.addEventListener("mousedown", function(event){

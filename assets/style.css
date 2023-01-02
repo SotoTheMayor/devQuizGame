@@ -3,31 +3,30 @@
 }
 
 header {
-    border-style: solid;
     padding: 20px;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
 }
 
+/* main page title */
 .title {
     text-align: center;
     flex-basis: 60%;
     align-self: center;
-    border-style: solid;
     font-size: 15px;
 }
 
+/* link to highscores page */
 .highscores {
     flex-basis: 20%;
-    border-style: solid;
     align-self: center;
     font-size: 10px;
     text-align: center;
 }
 
+/* timer in main page header */
 .timer {
-    /* display: flex; */
     flex-direction: column;
     border-style: solid;
     flex-basis: 20%;
@@ -35,23 +34,25 @@ header {
     align-self: center;
 }
 
-.sec {
+/* sec span in main page timer header */
+#sec {
     font-size: 20px;
-    font-weight: bold;
+    font-weight: bolder;
 }
 
 .timer h1 {
     font-size: 17px;
 }
 
+/* instructions and reset score buttons */
 aside {
     display: flex;
     flex-direction: row-reverse;
 
 }
 
+/* all html mains */
 main {
-    border-style: solid;
     padding: 20px;
     display: flex;
     flex-direction: row;
@@ -64,16 +65,8 @@ main {
     flex-basis: 50%;
 }
 
-.qHead {
-    border-style: solid;
-}
-
-/* .qNum {
-    border-style: solid;
-} */
-
 .qText {
-    border-style: solid;
+    font-size: 20px;
 }
 
 .answers {
@@ -81,70 +74,76 @@ main {
     flex-basis: 50%;
 }
 
-.aHead {
-    border-style: solid;
-}
-
-.aText {
-    border-style: solid;
-}
-
-li {
+/* removes bullets for answer buttons only */
+.aText li {
     list-style: none;
 }
 
+/* only targets answer buttons */
 .btn {
     border-radius: 8px;
+    font-size: 20px;
 }
 
+/* highlight to show selected answer */
 .btn:focus {
-    background-color:blueviolet;
+    background-color:lightblue;
 }
 
 footer {
-    border-style: solid;
     padding: 20px;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-
 }
 
-.start {
-    border-style: solid;
+/* button styling */
+.start, .submit {
+    font-size: 25px;
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
-.submit {
-    border-style: solid;
-
-    
+/* button styling */
+#instructions {
+    font-size: 15px;
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
+/* highscore html body */
 .hBody {
-    border-style: solid;
     padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
 }
 
-.hTitle {
-    border-style: solid;
-}
-
+/* adds box around top scores in highscores html */
 .topScores {
     border-style: solid;
 }
 
-.return {
-    border-style: solid;
+/* top 5 header on highscores html */
+#rankHeader {
+    font-weight: bold;
+    font-size: 25px;
 }
 
+.rank {
+    font-size: 20px;
+    font-style: italic;
+}
+
+/* html page switch links */
 a {
     text-decoration: none;
     color:dodgerblue;
 }
 
+/* html page switch links */
 a:visited {
     text-decoration: none;
     color:dodgerblue;
