@@ -9,16 +9,19 @@
 </head>
 <body class="hBody">
     <header class="hTitle"><h1>High Scores</h1></header>
+    <!-- added button for resetting high scores in local storage -->
     <aside><button id="reset">Reset High Scores</button></aside>
     <main class="topScores">
-        <ol>Top 5:
-            <li id="rank1"></li>
-            <li id="rank2"></li>
-            <li id="rank3"></li>
-            <li id="rank4"></li>
-            <li id="rank5"></li>
+        <ol id="rankHeader">Top 5:
+            <!-- list of top 5 scores -->
+            <li id="rank1" class="rank"></li>
+            <li id="rank2" class="rank"></li>
+            <li id="rank3" class="rank"></li>
+            <li id="rank4" class="rank"></li>
+            <li id="rank5" class="rank"></li>
         </ol>
     </main>
+    <!-- link to return to main index.html quiz page -->
     <footer class="return"><h3><a href="./index.html">Return to Main Page</a></h3></footer>
     <script src="./assets/highscores.js"></script>
 </body>
