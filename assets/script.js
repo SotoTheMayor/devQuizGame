@@ -11,7 +11,8 @@ var li4 = document.querySelector("#li4");
 var li5 = document.querySelector("#li5");
 var sec = document.querySelector("#sec");
 var score = 0;
-var secLeft = 90;
+var timerInterval;
+
 
 
 start.setAttribute("style", "visibility:visible") ;
@@ -26,25 +27,32 @@ li5.setAttribute("style", "visibility:hidden") ;
 
 qText.textContent = "This is where the question text will go" ;
 
-var timerInterval = setInterval(setTime, 1000);
+
+function beginTimer() {
+    timerInterval = setInterval(setTime, 1000)
+};
 
 function setTime() {
     secLeft--;
     sec.textContent = secLeft;
      if (secLeft===0) {
-        clearInterval(timerInterval);
+        stopTime();
         alert("time's up!");
+        q = 0;
+        quizFinish ();
 };
 };
 
 function stopTime() {
     clearInterval(timerInterval);
+    sec.textContent = 0;
+    timerInterval = null;
 };
 
 
 
-function startQuiz(event) {
-    event.currentTarget.setAttribute ("style", "visibility:hidden") ;
+function startQuiz() {
+    start.setAttribute ("style", "visibility:hidden") ;
     submit.setAttribute ("style", "visibility:visible") ;
     qNum.setAttribute("style", "visibility:visible") ;
     ul.setAttribute("style", "visibility:visible") ;
@@ -56,7 +64,7 @@ function startQuiz(event) {
     q = 0;
     finalScore = 0;
     secLeft = 20;
-    setTime();
+    beginTimer();
     quizQuestions();
 } ;
 
@@ -68,7 +76,6 @@ function quizQuestions() {
     li3.textContent = questions[q].li3;
     li4.textContent = questions[q].li4;
     li5.textContent = questions[q].li5;
-   // return q;
     
 }
 
@@ -194,7 +201,7 @@ var q5 = {
 var questions = [q1, q2, q3, q4, q5];
 
 start.addEventListener("click", startQuiz) ;
-//submit.addEventListener("mousedown", nextQuestion) ;
+
 
 submit.addEventListener("mousedown", function(event){
     event.stopPropagation;
