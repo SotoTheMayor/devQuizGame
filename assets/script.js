@@ -18,6 +18,7 @@ var timerInterval;
 start.setAttribute("style", "visibility:visible") ;
 submit.setAttribute("style", "visibility:hidden") ;
 qNum.setAttribute("style", "visibility:hidden") ;
+qText.setAttribute("style", "visibility:hidden") ;
 ul.setAttribute("style", "visibility:hidden") ;
 li1.setAttribute("style", "visibility:hidden") ;
 li2.setAttribute("style", "visibility:hidden") ;
@@ -25,7 +26,7 @@ li3.setAttribute("style", "visibility:hidden") ;
 li4.setAttribute("style", "visibility:hidden") ;
 li5.setAttribute("style", "visibility:hidden") ;
 
-qText.textContent = "This is where the question text will go" ;
+//qText.textContent = "This is where the question text will go" ;
 
 
 function beginTimer() {
@@ -35,7 +36,7 @@ function beginTimer() {
 function setTime() {
     secLeft--;
     sec.textContent = secLeft;
-     if (secLeft===0) {
+     if (secLeft<=0) {
         stopTime();
         alert("time's up!");
         q = 0;
@@ -55,6 +56,7 @@ function startQuiz() {
     start.setAttribute ("style", "visibility:hidden") ;
     submit.setAttribute ("style", "visibility:visible") ;
     qNum.setAttribute("style", "visibility:visible") ;
+    qText.setAttribute("style", "visibility:visible") ;
     ul.setAttribute("style", "visibility:visible") ;
     li1.setAttribute("style", "visibility:visible") ;
     li2.setAttribute("style", "visibility:visible") ;
@@ -70,6 +72,7 @@ function startQuiz() {
 
 function quizQuestions() {
     qNum.textContent = questions[q].qNum;
+    qText.textContent = questions[q].qText;
     ul.textContent = questions[q].ul;
     li1.textContent = questions[q].li1;
     li2.textContent = questions[q].li2;
@@ -84,29 +87,39 @@ function nextQuestion() {
         console.log(q);
         if (li1 == document.activeElement) {
             score = score + 100;
+        } else {
+            secLeft = secLeft - 5; 
         }
     } else if (q===1) {
         console.log(q);
         if (li1 == document.activeElement) {
             score = score + 100;
+        } else {
+            secLeft = secLeft - 5; 
         }
     } else if (q===2) {
         console.log(q);
         if (li1 == document.activeElement) {
             score = score + 100;
+        } else {
+            secLeft = secLeft - 5; 
         }
     } else if (q===3) {
         console.log(q);
         if (li1 == document.activeElement) {
             score = score + 100;
+        } else {
+            secLeft = secLeft - 5; 
         }
     } else if (q===4) {
         console.log(q);
         if (li1 == document.activeElement) {
             score = score + 100;
+        } else {
+            secLeft = secLeft - 5; 
         }
-    } else {
-        score = score + 0;
+    // } else {
+    //     score = score + 0;
     };
     console.log(score);
     q = q+1;
@@ -132,6 +145,7 @@ function quizFinish() {
     submit.setAttribute ("style", "visibility:hidden") ; 
     start.setAttribute ("style", "visibility:visible") ;
     qNum.setAttribute("style", "visibility:hidden") ;
+    qText.setAttribute("style", "visibility:hidden") ;
     ul.setAttribute("style", "visibility:hidden") ;
     li1.setAttribute("style", "visibility:hidden") ;
     li2.setAttribute("style", "visibility:hidden") ;
@@ -150,7 +164,8 @@ function quizFinish() {
 
 var q1 = {
     qNum: 1,
-    ul: "Question 1",
+    qText: "Question:1",
+    ul: "Answer 1:",
     li1: "A",
     li2: "B",
     li3: "C",
@@ -160,7 +175,8 @@ var q1 = {
 
 var q2 = {
     qNum: 2,
-    ul: "Question 2",
+    qText: "Question:2",
+    ul: "Answer 2:",
     li1: "F",
     li2: "G",
     li3: "H",
@@ -170,7 +186,8 @@ var q2 = {
 
 var q3 = {
     qNum: 3,
-    ul: "Question 3",
+    qText: "Question:3",
+    ul: "Answer 3:",
     li1: "K",
     li2: "L",
     li3: "M",
@@ -180,7 +197,8 @@ var q3 = {
 
 var q4 = {
     qNum: 4,
-    ul: "Question 4",
+    qText: "Question:4",
+    ul: "Answer 4:",
     li1: "P",
     li2: "Q",
     li3: "R",
@@ -190,7 +208,8 @@ var q4 = {
 
 var q5 = {
     qNum: 5,
-    ul: "Question 5",
+    qText: "Question:5",
+    ul: "Answer 5:",
     li1: "U",
     li2: "V",
     li3: "W",
