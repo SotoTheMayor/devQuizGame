@@ -11,18 +11,6 @@ var li3 = document.querySelector("#li3");
 var li4 = document.querySelector("#li4");
 var li5 = document.querySelector("#li5");
 var sec = document.querySelector("#sec");
-var highSaves = {
-    score1:"",
-    high1:"",
-    score2:"",
-    high2:"",
-    score3:"",
-    high3:"",
-    score4:"",
-    high4:"",
-    score5:"",
-    high5:"",
-}
 var highSaves = JSON.parse(localStorage.getItem("highSaves"));
 var score = 0;
 var timerInterval;
@@ -187,6 +175,7 @@ function finalScoreCalc() {
             high5: "blank",
             score5: 0,
             }
+            localStorage.setItem("highSaves", JSON.stringify(highSaves));
     };
     //tests for score rank based on local storage, adjusts ranks
     if (finalScore > highSaves.score1) {
