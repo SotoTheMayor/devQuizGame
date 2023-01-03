@@ -161,8 +161,7 @@ function quizFinish() {
 //local storage high score function
 function finalScoreCalc() {
 //creates local storage key if not present
-    var highSaves = JSON.parse(localStorage.getItem("highSaves"));
-    if (highSaves.high1 == null) {
+    if (!localStorage.getItem("highSaves")) {
         var highSaves = {
             high1: "blank",
             score1: 0,
@@ -176,6 +175,8 @@ function finalScoreCalc() {
             score5: 0,
             }
             localStorage.setItem("highSaves", JSON.stringify(highSaves));
+    } else {
+        var highSaves = JSON.parse(localStorage.getItem("highSaves"));
     };
     //tests for score rank based on local storage, adjusts ranks
     if (finalScore > highSaves.score1) {
